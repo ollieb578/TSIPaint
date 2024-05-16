@@ -8,21 +8,24 @@
 const prompt = require("prompt-sync")();
 
 
-// global vars - temporary
+// global vars
 // values required for the whole program to access
+let totalArea = 0;
+let areaByRoom = [];
 
-let totalArea = 0
-let areaByRoom = []
+let totalPaint = 0;
+let paintByRoom = [];
 
-let totalPaint = 0
-let paintByRoom = []
-
-let totalCost = 0
-let costByRoom = []
+let totalCost = 0;
+let costByRoom = [];
 
 // toggles visual mode, which displays diagrams for measurement
-let v = false
+let v = false;
 
+// 
+let uniform = false;
+let uniformPaintGrade = "value";
+let uniformColour = "white";
 
 // initial mathematical functions
 // determine coverage area, and paint required per m**2
@@ -189,6 +192,8 @@ function selectWall() {
             throw new Error('Obstacles cannot occupy more space than the wall does.');
         }
 
+        // TODO: 
+        // need to add check for colour, and add total to colourmap
         return result - obstacleArea;
     }
 }
