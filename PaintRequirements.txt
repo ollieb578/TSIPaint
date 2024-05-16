@@ -5,17 +5,17 @@
 // ask for measurements
 // calculate paint needed for each m**2
 
-// different shaped walls?
-// multiple walls?
-//  - different shapes?
-//  - count floors/ceilings?
-// multiple rooms?
-// obstacles?
-//  - doors? windows? sockets?
-//  - can't be bigger than wall (try/catch)
+// different shaped walls? - DONE
+// multiple walls? - DONE
+//  - different shapes? - DONE
+//  - count floors/ceilings? - No easy way to implement this now - since input is collected in base calculation functions.
+// multiple rooms? - DONE
+// obstacles? - DONE
+//  - doors? windows? sockets? - DONE
+//  - can't be bigger than wall (try/catch) - DONE
 
-// modular shape calculation (circular windows/doors)
-// visual representations for shape calculations
+// modular shape calculation (circular windows/doors) - DONE
+// visual representations for shape calculations - DONE
 /*
    ^ |\
    | | \
@@ -38,7 +38,7 @@
 // json?
 // research json tabulation - searchability - integration with switch/case
 
-// can use any interface for input -> prompt-sync? prompt? readline?
+// can use any interface for input -> prompt-sync? prompt? readline? DONE
 // if extra time, build frontend/gui
 
 // view paint catalogue, or calculator
@@ -47,8 +47,12 @@
 // paint options - per wall or uniform - selector or get by internal SKU
 // no of rooms -> no of walls -> wall shape -> wall size -> paint type for usage
 
-// input, if else, switch case AT LEAST 1 of each
+// input, if else, switch case AT LEAST 1 of each - DONE 
 // run AT LEAST 1 unit test - use jest
 
-// keep total for all paint used, and per room
+// keep total for all paint used, and per room - DONE
 // give cost breakdown per room at the end
+
+// clone room functionality?
+
+// 0.1L/m**2 of paint - DONE
