@@ -12,6 +12,7 @@
 // multiple rooms?
 // obstacles?
 //  - doors? windows? sockets?
+//  - can't be bigger than wall (try/catch)
 
 // modular shape calculation (circular windows/doors)
 // visual representations for shape calculations
@@ -31,7 +32,7 @@
 //  - colour
 //  - cheapest option
 //      - different can sizes (2*10 is cheaper than 10 + 5 + 2 + 1)
-//  - automatically add 15% to needed paint
+//  - automatically add 10% to needed paint
 
 // data structure for storing paint values
 // json?
@@ -47,6 +48,7 @@
 // no of rooms -> no of walls -> wall shape -> wall size -> paint type for usage
 
 // input, if else, switch case AT LEAST 1 of each
+// run AT LEAST 1 unit test - use jest
 
 // keep total for all paint used, and per room
 // give cost breakdown per room at the end

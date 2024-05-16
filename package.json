@@ -1,0 +1,24 @@
+{
+  "name": "tsipaint",
+  "version": "1.0.0",
+  "description": "Paint usage and cost calculator.",
+  "main": "Paint.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ollieb578/TSIPaint.git"
+  },
+  "keywords": [
+    "calculator",
+    "paint",
+    "TSI"
+  ],
+  "author": "Oliver Barnes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ollieb578/TSIPaint/issues"
+  },
+  "homepage": "https://github.com/ollieb578/TSIPaint#readme"
+}
