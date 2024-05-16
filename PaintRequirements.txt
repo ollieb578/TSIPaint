@@ -1,0 +1,48 @@
+// Requirements for TSI Javascript Paint project
+// By Oliver Barnes, 16/05/2024
+
+// calculate paint needed for walls
+// ask for measurements
+// calculate paint needed for each m**2
+
+// different shaped walls?
+// multiple walls?
+//  - different shapes?
+//  - count floors/ceilings?
+// multiple rooms?
+// obstacles?
+//  - doors? windows? sockets?
+
+// modular shape calculation (circular windows/doors)
+// visual representations for shape calculations
+/*
+   ^ |\
+   | | \
+   | |  \
+   | |   \
+   | |    \
+   | |     \
+   v |------\
+     <------>
+*/
+
+// types of paint - costing?
+//  - premuim vs value
+//  - colour
+//  - cheapest option
+//      - different can sizes (2*10 is cheaper than 10 + 5 + 2 + 1)
+
+// data structure for storing paint values
+// json?
+// research json tabulation - searchability - integration with switch/case
+
+// can use any interface for input -> prompt-sync? prompt? readline?
+// if extra time, build frontend/gui
+
+// view paint catalogue, or calculator
+// catalogue by colour, brand, size
+
+// paint options - per wall or uniform - selector or get by internal SKU
+// no of rooms -> no of walls -> wall shape -> wall size -> paint type for usage
+
+// input, if else, switch case AT LEAST 1 of each
