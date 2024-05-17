@@ -37,8 +37,9 @@ let uniformPaintGrade = "value";
 let uniformColour = "white";
 let uniformSKU = "vwhite";
 
-// initial mathematical functions
+// mathematical functions
 // determine coverage area, and paint required per m**2
+// also calculates final cost of paint used, and the cheapest price available
 
 // calculates area of rectangular area given user input
 // returns area of wall in m**2
@@ -91,7 +92,6 @@ function areaCircle() {
 function areaToPaint(a) {
     return (a * 0.1);
 }
-
 
 // paint functions
 // these relate to reading in the catalogue file, displaying the catalogue, and displaying individual entries
@@ -338,9 +338,11 @@ function selectWall() {
             throw new Error('Obstacles cannot occupy more space than the wall does.');
         }
 
-        // TODO: 
-        // need to add check for colour, and add total to colourmap
-        return result - obstacleArea;
+        result -= obstacleArea;
+
+        paintSelect(result);
+
+        return result;
     }
 }
 
@@ -400,13 +402,39 @@ function totalRooms() {
 }
 
 // allows the user to pick the type of paint they want
+// params:
+// area - paint coverage area in m**2
 // !SIDE EFFECT! alters colourMap global
-function paintSelect() {
-    let userChoice = prompt(" ")
+function paintSelect(area) {
+    catalogue = readCatalogue();
+    let userChoice = prompt("Enter the SKU of paint to use, or type [S] to search paints: ").toLowerCase();
+    let amount = areaToPaint(area);
+
+    const skuData = groupBy(catalogue.paint, ({ SKU }) => SKU);
+
+    if (userChoice == "s") {
+        searchCatalogue(catalogue);
+        paintSelect(area);
+    } else {
+        if (userChoice in skuData) {
+            if (typeof colourMap.get(userChoice) == 'undefined') {
+                colourMap.set(userChoice, amount);
+            } else {
+                colourMap.set(userChoice, colourMap.get(userChoice) + amount);
+            }
+        } else {
+            console.log("SKU not in catalogue. Please try again.");
+            paintSelect(area);
+        }
+    }
 }
 
+
+
+
+
 //printCatalogue(catalogue);
-//console.log(totalRooms());
+console.log(totalRooms());
 //console.log(areaByRoom);
 
-searchCatalogue(catalogue);
+console.log(colourMap);

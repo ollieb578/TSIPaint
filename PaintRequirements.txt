@@ -3,7 +3,7 @@
 
 // calculate paint needed for walls - DONE
 // ask for measurements - DONE
-// calculate paint needed for each m**2
+// calculate paint needed for each m**2 - DONE
 
 // different shaped walls? - DONE
 // multiple walls? - DONE
@@ -24,9 +24,8 @@
 //      - different can sizes (2*10 is cheaper than 10 + 5 + 2 + 1)
 //  - automatically add 10% to needed paint
 
-// data structure for storing paint values
-// json?
-// research json tabulation - searchability - integration with switch/case
+// data structure for storing paint values - DONE
+// research json tabulation - searchability - integration with switch/case - DONE
 
 // can use any interface for input -> prompt-sync? prompt? readline? - DONE
 // if extra time, build frontend/gui - N/A
@@ -34,8 +33,8 @@
 // view paint catalogue, or calculator
 // catalogue by colour, brand, size - DONE
 
-// paint options - per wall or uniform - selector or get by internal SKU
-// no of rooms -> no of walls -> wall shape -> wall size -> paint type for usage
+// paint options - per wall or uniform - selector or get by internal SKU - DONE
+// no of rooms -> no of walls -> wall shape -> wall size -> paint type for usage - DONE
 
 // input, if else, switch case AT LEAST 1 of each - DONE 
 // run AT LEAST 1 unit test - use jest
