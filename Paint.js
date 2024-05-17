@@ -9,7 +9,6 @@ const prompt = require("prompt-sync")();
 const fs = require("fs");
 const groupBy = require("core-js/actual/array/group-by");
 const path = require("path");
-const PromptSync = require("prompt-sync");
 
 // global vars
 // values required for the whole program to access
