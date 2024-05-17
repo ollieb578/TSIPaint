@@ -23,5 +23,8 @@
   "homepage": "https://github.com/ollieb578/TSIPaint#readme",
   "dependencies": {
     "core-js": "^3.37.1"
+  },
+  "devDependencies": {
+    "@types/core-js": "^2.5.8"
   }
 }

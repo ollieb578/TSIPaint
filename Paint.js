@@ -1,7 +1,28 @@
 // TSI Javascript Paint project
 // By Oliver Barnes, 16/05/2024
+
+// Notes for reader/user:
 // There's some confusing use of error handling in here, as well as Try/Catch statements.
 // I figured this was preferable to asking for user input recursively.
+//
+// DEFINITELY should've implemented as an OOP approach, single script with no objects became
+// too confusing and unwieldy too fast.
+//
+// catalogue.json is formatted improperly, doesn't actually use JSON formatting, closer to .csv.
+// This became a real issue, requiring core-js library to offset some of the issues using the
+// _.groupBy() function.
+// 
+// Due to a SEVERE lack of planning there's not much cohesion between the implementation 
+// of each function, so a lot of them have major side effects and a lot of global vars are used. 
+// This would've been easy to offset by drawing up a basic plan but apparently I couldn't 
+// find a notepad.
+//
+// Lessons learned:
+//  - Plan the code more. Draw up what values are required at the start and end, where they're
+//    accessed and how. This would've revealed the OOP thing quickly.
+//  - Understand file formats better/get a sample from somewhere. The JSON thing is embarrasing,
+//    but they've given me hell on a seperate project so I format everything like a .csv.
+//  - Ask questions about error handling - that input thing feels so weird and wrong. I hate it.
 
 // imports
 // requires prompt-sync
@@ -91,6 +112,20 @@ function areaCircle() {
 // returns area of wall in m**2, to 2 decimal places
 function areaToPaint(a) {
     return (a * 0.1);
+}
+
+// Checks what the cheapest option is when buying a quantity of paint
+// !SIDE EFFECT!
+function costOptimizer() {
+
+}
+
+// calculates actual cost of paint required and specified by the user
+// !SIDE EFFECT! accesses colourMap, and alters totalCost.
+function calculateCost() {
+    for (const [key, value] of colourMap) {
+
+    }
 }
 
 // paint functions
