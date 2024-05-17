@@ -21,6 +21,10 @@ let paintByRoom = [];
 let totalCost = 0;
 let costByRoom = [];
 
+// paint colour map
+// this is a kv store that holds the amount of each type of paint used
+let colourMap = new Map();
+
 // toggles visual mode, which displays diagrams for measurement
 let v = false;
 
@@ -188,17 +192,41 @@ function catalogueControls(){
     return prompt("[P]revious, [*N]ext, [Exit]: ").toLowerCase();
 }
 
-//
+// actual search function without UI wrapper
+// params:
+// keyword - string, name of a colour
+// catalogue - JSON object to be searched
+// returns filtered JSON object 
+function catalogueSearch(keyword, catalogue){
+    return catalogue.filter(
+        function(catalogue) {
+            return catalogue.Colour == keyword;
+        }
+    );
+}
+
+// allows user to quickly find paint that they'd like from the catalogue
+// search only implemented by colour
 function searchCatalogue(catalogue) {
     catalogue = readCatalogue();
 
+    let searchTerm = prompt("Please enter the name of the colour to search for: ").toLowerCase();
+    let searchResult = catalogueSearch(searchTerm, catalogue.paint);
 
+    const skuData = groupBy(searchResult, ({ SKU }) => SKU);
+    const results = Object.keys(skuData).length;
+    console.log("Number of results: "+results);
 
-    for (let paint in catalogue) {
-        
+    for (let paint in skuData) {
+        printPaintsBySKU(skuData[paint]);
     }
 
-    console.log(catalogue);
+    if (results == 0) {
+        let userChoice = prompt("No results. Search again? [Y]es or [*N]o: ").toLowerCase();
+        if (userChoice == "y") {
+            searchCatalogue(catalogue);
+        }
+    }
 }
 
 // selection functions
@@ -372,11 +400,13 @@ function totalRooms() {
 }
 
 // allows the user to pick the type of paint they want
-
+// !SIDE EFFECT! alters colourMap global
 function paintSelect() {
-
+    let userChoice = prompt(" ")
 }
 
-printCatalogue(catalogue);
-console.log(totalRooms());
-console.log(areaByRoom);
+//printCatalogue(catalogue);
+//console.log(totalRooms());
+//console.log(areaByRoom);
+
+searchCatalogue(catalogue);
