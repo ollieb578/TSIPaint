@@ -11,7 +11,7 @@
 //
 // catalogue.json is formatted improperly, doesn't actually use JSON formatting, closer to .csv.
 // This became a real issue, requiring core-js library to offset some of the issues using the
-// _.groupBy() function. Also why the hell is that not standard in node, it's useful.
+// _.groupBy() function. This caused the project to balloon to over 3000 files. What scope?
 // 
 // Due to a SEVERE lack of planning there's not much cohesion between the implementation 
 // of each function, so a lot of them have major side effects and a lot of global vars are used. 
@@ -38,6 +38,7 @@ const groupBy = require("core-js/actual/array/group-by");
 
 // global vars
 // values required for the whole program to access
+// some of these aren't implemented at all.
 let totalArea = 0;
 let areaByRoom = [];
 
@@ -106,7 +107,7 @@ function areaCircle() {
         console.log("\n         , - ~ ~ ~ - ,\n     , '               ' ,\n   ,                       ,\n  ,                         ,\n ,                           ,\n ,<------------------------->,\n ,                           ,\n  ,                         ,\n   ,                       ,\n     ,                  , '\n       ' - , _ _ _ ,  '");
     }
     const d = prompt("Please enter the diameter of the shape: ");
-    let r = d/2
+    let r = d/2;
 
     return (((r**2) * Math.PI).toFixed(2));
 }
@@ -120,17 +121,64 @@ function areaToPaint(a) {
 }
 
 // Checks what the cheapest option is when buying a quantity of paint
+// this was a real nightmare to figure out.
 // !SIDE EFFECT!
 // params:
 // amount - number, amount of paint required in litres
 // sku - string, id of paint to use
+// returns subManifestMap, which contains the SKU, the price of the paint required
+//  and the quantities of the paints needed.
 function costOptimizer(amount, sku) {
+    const searchResult = skuSearch(sku, catalogue.paint);
+    let subManifestMap = new Map();
 
+    let volInfo = [];
+    let permutations = [];
+    let prices = [];
+
+    //subManifestMap.set("SKU", sku);
+    
+    for (const item in searchResult) {
+        volInfo.push([Number(searchResult[item].Volume), Number(searchResult[item].Price)]);
+    }
+
+    let volmax = Math.ceil(amount/volInfo[0][0]) * volInfo[0][0];
+    let quantA;
+    let quantB;
+
+    // there's a recursive answer to this,
+    // i couldn't be bothered to find it at 5pm on friday
+    for (const item1 in volInfo) {
+        for (const item2 in volInfo) {
+            volmax = Math.ceil(amount/volInfo[item2][0]) * volInfo[item2][0];
+
+            if (volInfo[item1][0] == volInfo[item2][0]){
+                quantA = volmax/volInfo[item1][0];
+                permutations.push([volInfo[item1][0], quantA]);
+                prices.push(volInfo[item1][1]*quantA);
+            } else {
+                quantA = Math.floor(amount/volInfo[item1][0]);
+                quantB = (volmax - (quantA*volInfo[item1][0]))/volInfo[item2][0];
+                
+                permutations.push([[volInfo[item1][0], quantA], [volInfo[item2][0], quantB]]);
+                prices.push((volInfo[item1][1]*quantA) + (volInfo[item2][1]*quantB));
+            }
+        }
+    }
+
+    let mindex = prices.indexOf(Math.min.apply(Math, prices));
+    subManifestMap.set("Price", prices[mindex]);
+    subManifestMap.set("Quantities", permutations[mindex]);
+
+    return subManifestMap;
 }
 
 // calculates actual cost of paint required and specified by the user
+// prints manifest with cost breakdown, and total cost
+// has to be run after colourMap has been populated
 // !SIDE EFFECT! accesses/alters colourMap, and alters totalCost.
 function calculateCost() {
+    let costMap = new Map();
     let add10 = prompt("Add 10% extra to account for wastage? [*Y]es or [N]o: ").toLowerCase();
 
     if (add10 == "n") {
@@ -140,12 +188,13 @@ function calculateCost() {
             map.set(key, value * 1.1);
 
         });
-        
+
         totalArea *= 1.1;
         console.log("Additional 10% added.");
     }
 
     for (const [key, value] of colourMap) {
+        costMap.set(key, costOptimizer(value, key));
         
     }
 }
@@ -247,6 +296,19 @@ function printCatalogue(catalogue) {
 // returns - string, handled by switch/case in catalogue function
 function catalogueControls(){
     return prompt("[P]revious, [*N]ext, [Exit]: ").toLowerCase();
+}
+
+// get paint by sku
+// params:
+// sku - string, name of a colour
+// catalogue - JSON object to be searched
+// returns filtered JSON object 
+function skuSearch(sku, catalogue){
+    return catalogue.filter(
+        function(catalogue) {
+            return catalogue.SKU == sku;
+        }
+    );
 }
 
 // actual search function without UI wrapper
@@ -496,3 +558,5 @@ console.log(totalRooms());
 //console.log(areaByRoom);
 
 console.log(colourMap);
+
+//catalogue = readCatalogue();
