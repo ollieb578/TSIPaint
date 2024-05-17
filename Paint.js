@@ -3,33 +3,38 @@
 
 // Notes for reader/user:
 // There's some confusing use of error handling in here, as well as Try/Catch statements.
-// I figured this was preferable to asking for user input recursively.
+// I figured this was preferable to asking for user input recursively, but there's cases
+// where I've done that too. Neither feels right.
 //
 // DEFINITELY should've implemented as an OOP approach, single script with no objects became
 // too confusing and unwieldy too fast.
 //
 // catalogue.json is formatted improperly, doesn't actually use JSON formatting, closer to .csv.
 // This became a real issue, requiring core-js library to offset some of the issues using the
-// _.groupBy() function.
+// _.groupBy() function. Also why the hell is that not standard in node, it's useful.
 // 
 // Due to a SEVERE lack of planning there's not much cohesion between the implementation 
 // of each function, so a lot of them have major side effects and a lot of global vars are used. 
 // This would've been easy to offset by drawing up a basic plan but apparently I couldn't 
 // find a notepad.
 //
+// PaintRequirements.txt contains additional info.
+
 // Lessons learned:
 //  - Plan the code more. Draw up what values are required at the start and end, where they're
 //    accessed and how. This would've revealed the OOP thing quickly.
 //  - Understand file formats better/get a sample from somewhere. The JSON thing is embarrasing,
-//    but they've given me hell on a seperate project so I format everything like a .csv.
+//    but they've given me hell on a separate project so I format everything like a .csv.
 //  - Ask questions about error handling - that input thing feels so weird and wrong. I hate it.
+//    Using a GUI might be the best way to circumvent this, but it's also a lot of effort.
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!! FOR YOUR OWN SAKE, DON'T READ PAST THIS POINT !!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // imports
-// requires prompt-sync
+// requires prompt-sync and core-js
 const prompt = require("prompt-sync")();
 const fs = require("fs");
 const groupBy = require("core-js/actual/array/group-by");
-const path = require("path");
 
 // global vars
 // values required for the whole program to access
@@ -116,15 +121,32 @@ function areaToPaint(a) {
 
 // Checks what the cheapest option is when buying a quantity of paint
 // !SIDE EFFECT!
-function costOptimizer() {
+// params:
+// amount - number, amount of paint required in litres
+// sku - string, id of paint to use
+function costOptimizer(amount, sku) {
 
 }
 
 // calculates actual cost of paint required and specified by the user
-// !SIDE EFFECT! accesses colourMap, and alters totalCost.
+// !SIDE EFFECT! accesses/alters colourMap, and alters totalCost.
 function calculateCost() {
-    for (const [key, value] of colourMap) {
+    let add10 = prompt("Add 10% extra to account for wastage? [*Y]es or [N]o: ").toLowerCase();
 
+    if (add10 == "n") {
+        console.log("Proceeding without additional 10%.");
+    } else {
+        colourMap.forEach((value, key, map) => {
+            map.set(key, value * 1.1);
+
+        });
+        
+        totalArea *= 1.1;
+        console.log("Additional 10% added.");
+    }
+
+    for (const [key, value] of colourMap) {
+        
     }
 }
 
@@ -412,7 +434,7 @@ function totalWalls(areaByRoom) {
 // allows user to input the number of rooms in the current building
 // iterates totalWalls to calculate surface area to add to totals
 // returns wall space of the rooms in m**2
-// !SIDE EFFECT!: directly alters areaByRoom list, not passed in as param to this function
+// !SIDE EFFECT!: directly alters areaByRoom list and totalArea var
 function totalRooms() {
     let total = 0;
 
@@ -433,6 +455,7 @@ function totalRooms() {
         }
     }
 
+    totalArea = total;
     return total;
 }
 

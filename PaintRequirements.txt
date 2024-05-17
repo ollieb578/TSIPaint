@@ -22,7 +22,7 @@
 //  - colour
 //  - cheapest option
 //      - different can sizes (2*10 is cheaper than 10 + 5 + 2 + 1)
-//  - automatically add 10% to needed paint
+//  - automatically add 10% to needed paint - DONE
 
 // data structure for storing paint values - DONE
 // research json tabulation - searchability - integration with switch/case - DONE
