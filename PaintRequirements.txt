@@ -17,10 +17,10 @@
 // modular shape calculation (circular windows/doors) - DONE
 // visual representations for shape calculations - DONE
 
-// types of paint - costing?
+// types of paint - costing? - DONE
 //  - premium vs value
 //  - colour
-//  - cheapest option
+//  - cheapest option 
 //      - different can sizes (2*10 is cheaper than 10 + 5 + 2 + 1) - DONE
 //  - automatically add 10% to needed paint - DONE
 
@@ -30,7 +30,7 @@
 // can use any interface for input -> prompt-sync? prompt? readline? - DONE
 // if extra time, build frontend/gui - N/A
 
-// view paint catalogue, or calculator
+// view paint catalogue, or calculator - DONE
 // catalogue by colour, brand, size - DONE
 
 // paint options - per wall or uniform - selector or get by internal SKU - DONE
