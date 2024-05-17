@@ -32,7 +32,7 @@
 // if extra time, build frontend/gui - N/A
 
 // view paint catalogue, or calculator
-// catalogue by colour, brand, size
+// catalogue by colour, brand, size - DONE
 
 // paint options - per wall or uniform - selector or get by internal SKU
 // no of rooms -> no of walls -> wall shape -> wall size -> paint type for usage

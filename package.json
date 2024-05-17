@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/ollieb578/TSIPaint/issues"
   },
-  "homepage": "https://github.com/ollieb578/TSIPaint#readme"
+  "homepage": "https://github.com/ollieb578/TSIPaint#readme",
+  "dependencies": {
+    "core-js": "^3.37.1"
+  }
 }

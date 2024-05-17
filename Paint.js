@@ -6,7 +6,10 @@
 // imports
 // requires prompt-sync
 const prompt = require("prompt-sync")();
-
+const fs = require("fs");
+const groupBy = require("core-js/actual/array/group-by");
+const path = require("path");
+const PromptSync = require("prompt-sync");
 
 // global vars
 // values required for the whole program to access
@@ -22,10 +25,14 @@ let costByRoom = [];
 // toggles visual mode, which displays diagrams for measurement
 let v = false;
 
-// 
+// stores json object containing all paint data
+var catalogue;
+
+// contains values relating to uniform paint - if all walls are the same colour
 let uniform = false;
 let uniformPaintGrade = "value";
 let uniformColour = "white";
+let uniformSKU = "vwhite";
 
 // initial mathematical functions
 // determine coverage area, and paint required per m**2
@@ -82,6 +89,118 @@ function areaToPaint(a) {
     return (a * 0.1);
 }
 
+
+// paint functions
+// these relate to reading in the catalogue file, displaying the catalogue, and displaying individual entries
+// anything to do with the catalogue JSON object is handled here
+
+// reads the contents of the catalogue file into a global object variable
+// returns json object, the contents of the catalogue.json file
+function readCatalogue() {
+    let data;
+    try {
+        data = JSON.parse(fs.readFileSync("./catalogue.json"));
+    } catch (Error) {
+        console.log("Error: catalogue.json is not present or cannot be accessed.");
+    }
+
+    return(data);
+}
+
+// prints formatted out based on given json paint object
+// params:
+// paint - json, describes a type of paint
+function printPaint(paint) {
+    console.log("SKU: "+paint.SKU+"\nGrade: "+paint.Grade+"\nBrand: "+paint.Brand+"\nName: "+paint.Name+"\nColour:"+paint.Colour+"\nVolume:"+paint.Volume+"\nPrice:"+paint.Price);
+}
+
+// prints formatted out based on a group of paints with a shared SKU
+// prints general info, then volumes and prices underneath (as these are independant of SKU)
+// params:
+// paints - json, describes a list of paints with a shared SKU
+function printPaintsBySKU(paints) {
+    const initialPaint = paints[0];
+    let currentPaint;
+
+    console.log("-------------------------------------------------------")
+    console.log("SKU: "+initialPaint.SKU+"\nGrade: "+initialPaint.Grade+"         Brand: "+initialPaint.Brand+"\nName: "+initialPaint.Name+"        Colour: "+initialPaint.Colour+"\n\n  Prices:");
+
+    for (let paint in paints) {
+        currentPaint = paints[paint];
+        console.log("   Volume: "+currentPaint.Volume+"      Price: "+currentPaint.Price);
+    }
+}
+
+// Prints a formatted catalogue of all available paints
+// Groups them by internal SKU value.
+//
+// Reliant on user input, prints 5 paints per page.
+// params:
+// catalogue - JSON object, contains all paint data
+function printCatalogue(catalogue) {
+    catalogue = readCatalogue();
+
+    // number of results per catalogue page
+    const pageCount = 5;
+    const skuData = groupBy(catalogue.paint, ({ SKU }) => SKU);
+    const results = Object.keys(skuData).length;
+
+    let dataSlice;
+    
+    console.log("Number of results: "+results);
+
+    catalogueLoop:
+    for (let i = 0; i < results; i+=pageCount) {
+        dataSlice = Object.entries(skuData).slice(i, i + (pageCount));
+        console.log(i);
+
+        for (let paint in dataSlice) {
+            printPaintsBySKU(skuData[Object.keys(skuData)[i + Number(paint)]]);
+        }
+
+        if (results < pageCount) {
+            console.log("\nAll entries printed!");
+        } else {
+            let userIn = catalogueControls();
+
+            if (userIn == "e") {
+                console.log("Exiting...");
+                break catalogueLoop;
+            } else if (userIn == "p") {
+                if (i >= pageCount) {
+                    i-=(2*pageCount);
+                } else {
+                    i = 0;
+                }
+            } else {
+                if (results <= i+pageCount) {
+                    console.log("No more results to display! Exiting...");
+                    break catalogueLoop;
+                } 
+            }
+        }
+
+    }
+}
+
+// context action for catalogue traversal
+// returns - string, handled by switch/case in catalogue function
+function catalogueControls(){
+    return prompt("[P]revious, [*N]ext, [Exit]: ").toLowerCase();
+}
+
+//
+function searchCatalogue(catalogue) {
+    catalogue = readCatalogue();
+
+
+
+    for (let paint in catalogue) {
+        
+    }
+
+    console.log(catalogue);
+}
 
 // selection functions
 // 
@@ -253,5 +372,12 @@ function totalRooms() {
     return total;
 }
 
+// allows the user to pick the type of paint they want
+
+function paintSelect() {
+
+}
+
+printCatalogue(catalogue);
 console.log(totalRooms());
 console.log(areaByRoom);

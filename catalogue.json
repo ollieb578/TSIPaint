@@ -1,10 +1,17 @@
-{"paints":
+{"paint":
 [
-    {"SKU": "PDWhite10", "Brand": "Dulux", "Name": "Pure brilliant", "Colour": "white",  "Grade": "premium", "Volume": "10", "Price": "24"},
-    {"SKU": "PDWhite5", "Brand": "Dulux", "Name": "Pure brilliant", "Colour": "white",  "Grade": "premium", "Volume": "5", "Price": "18"},
-    {"SKU": "PDWhite2.5", "Brand": "Dulux", "Name": "Pure brilliant", "Colour": "white",  "Grade": "premium", "Volume": "2.5", "Price": "16"},
-    {"SKU": "PDGreen2.5", "Brand": "Dulux", "Name": "Emerald glade", "Colour": "green",  "Grade": "premium", "Volume": "2.5", "Price": "22"},
-    {"SKU": "PDWhite10", "Brand": "Leyland", "Name": "Magnolia", "Colour": "white",  "Grade": "value", "Volume": "10", "Price": "13"},
-    {"SKU": "PDWhite10", "Brand": "Leyland", "Name": "Magnolia", "Colour": "white",  "Grade": "value", "Volume": "10", "Price": "13"}
+    {"SKU": "pwhite1", "Brand": "Dulux", "Name": "Pure brilliant", "Colour": "white",  "Grade": "premium", "Volume": "10", "Price": "24"},
+    {"SKU": "pwhite1", "Brand": "Dulux", "Name": "Pure brilliant", "Colour": "white",  "Grade": "premium", "Volume": "5", "Price": "18"},
+    {"SKU": "pwhite1", "Brand": "Dulux", "Name": "Pure brilliant", "Colour": "white",  "Grade": "premium", "Volume": "2.5", "Price": "16"},
+    {"SKU": "pblack1", "Brand": "Dulux", "Name": "Anthracite", "Colour": "black",  "Grade": "premium", "Volume": "10", "Price": "24"},
+    {"SKU": "pblack1", "Brand": "Dulux", "Name": "Anthracite", "Colour": "black",  "Grade": "premium", "Volume": "5", "Price": "18"},
+    {"SKU": "pblack1", "Brand": "Dulux", "Name": "Anthracite", "Colour": "black",  "Grade": "premium", "Volume": "2.5", "Price": "16"},
+    {"SKU": "pgreen1", "Brand": "Dulux", "Name": "Emerald glade", "Colour": "green",  "Grade": "premium", "Volume": "2.5", "Price": "22"},
+    {"SKU": "pblue1", "Brand": "Dulux", "Name": "Sapphire", "Colour": "blue",  "Grade": "premium", "Volume": "2.5", "Price": "22"},
+    {"SKU": "pred1", "Brand": "Dulux", "Name": "Ruby", "Colour": "red",  "Grade": "premium", "Volume": "2.5", "Price": "22"},
+    {"SKU": "vwhite1", "Brand": "Leyland", "Name": "Magnolia", "Colour": "white",  "Grade": "value", "Volume": "10", "Price": "13"},
+    {"SKU": "vblack1", "Brand": "Leyland", "Name": "Granite", "Colour": "black",  "Grade": "value", "Volume": "10", "Price": "13"},
+    {"SKU": "vgreen1", "Brand": "Leyland", "Name": "Glade", "Colour": "green",  "Grade": "value", "Volume": "2.5", "Price": "13"},
+    {"SKU": "vblue1", "Brand": "Leyland", "Name": "Azure", "Colour": "blue",  "Grade": "value", "Volume": "2.5", "Price": "13"}
 ]
 }
