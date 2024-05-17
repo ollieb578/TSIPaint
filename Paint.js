@@ -154,7 +154,7 @@ function costOptimizer(amount, sku) {
 
             if (volInfo[item1][0] == volInfo[item2][0]){
                 quantA = volmax/volInfo[item1][0];
-                permutations.push([volInfo[item1][0], quantA]);
+                permutations.push([[volInfo[item1][0], quantA]]);
                 prices.push(volInfo[item1][1]*quantA);
             } else {
                 quantA = Math.floor(amount/volInfo[item1][0]);
@@ -180,6 +180,7 @@ function costOptimizer(amount, sku) {
 function calculateCost() {
     let costMap = new Map();
     let add10 = prompt("Add 10% extra to account for wastage? [*Y]es or [N]o: ").toLowerCase();
+    let optimizerResult;
 
     if (add10 == "n") {
         console.log("Proceeding without additional 10%.");
@@ -188,14 +189,25 @@ function calculateCost() {
             map.set(key, value * 1.1);
 
         });
-
         totalArea *= 1.1;
         console.log("Additional 10% added.");
     }
 
     for (const [key, value] of colourMap) {
-        costMap.set(key, costOptimizer(value, key));
+        optimizerResult = costOptimizer(value, key);
+
+        costMap.set(key, optimizerResult);
         
+        totalCost += optimizerResult.get("Price");
+    }
+
+    console.log("Total cost: £"+totalCost+"\nFull Cost Breakdown:")
+
+    for (const [key, value] of costMap) {
+        console.log("\n "+key+"     Price: £"+value.get("Price"));
+        for (const item in value.get("Quantities")){
+            console.log("       "+value.get("Quantities")[item][0]+"L :"+value.get("Quantities")[item][1])
+        }
     }
 }
 
@@ -355,7 +367,7 @@ function searchCatalogue(catalogue) {
 // this confirmation function will be called to ask if they'd like to proceed
 // returns boolean, based on user input
 function invalidConfirmation() {
-    const response = prompt("Input value is invalid. Try again? [y]es or [n]o. ");
+    const response = prompt("Input value is invalid. Try again? [Y]es or [*N]o. ");
 
     if (response.toLowerCase() == "y") {
         return true;
@@ -549,14 +561,35 @@ function paintSelect(area) {
     }
 }
 
+function main() {
+    catalogue = readCatalogue();
 
+    console.log("Welcome to TSIPaintCalculator.");
+    let userChoice = prompt("[V]iew catalogue or [C]alculate paint cost for building? ").toLowerCase();
 
+    if (userChoice == "v") {
+        userChoice = prompt("[P]rint catalogue or [S]earch? ").toLowerCase();
+        if(userChoice == "p"){
+            printCatalogue(catalogue);
+            main();
+        } else if (userChoice == "s") {
+            searchCatalogue(catalogue);
+            main();
+        } else {
+            if (invalidConfirmation()){
+                main();
+            }
+        }
+    } else if (userChoice == "c") {
+        totalRooms();
+        calculateCost();
+        main();
+    } else {
+        if (invalidConfirmation()) {
+            main();
+        }
+    }
+}
 
-
-//printCatalogue(catalogue);
-console.log(totalRooms());
-//console.log(areaByRoom);
-
-console.log(colourMap);
-
-//catalogue = readCatalogue();
+// 1 line program
+main();

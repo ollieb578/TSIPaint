@@ -21,7 +21,7 @@
 //  - premium vs value
 //  - colour
 //  - cheapest option
-//      - different can sizes (2*10 is cheaper than 10 + 5 + 2 + 1)
+//      - different can sizes (2*10 is cheaper than 10 + 5 + 2 + 1) - DONE
 //  - automatically add 10% to needed paint - DONE
 
 // data structure for storing paint values - DONE
@@ -40,7 +40,7 @@
 // run AT LEAST 1 unit test - use jest
 
 // keep total for all paint used, and per room - DONE
-// give cost breakdown per room at the end
+// give cost breakdown per room at the end - N/A
 
 // clone room functionality? - N/A
 
