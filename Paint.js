@@ -36,6 +36,10 @@ const prompt = require("prompt-sync")();
 const fs = require("fs");
 const groupBy = require("core-js/actual/array/group-by");
 
+// exports
+// required for unit test demo
+module.exports = areaToPaint;
+
 // global vars
 // values required for the whole program to access
 // some of these aren't implemented at all.
@@ -53,7 +57,7 @@ let costByRoom = [];
 let colourMap = new Map();
 
 // toggles visual mode, which displays diagrams for measurement
-let v = false;
+let v = true;
 
 // stores json object containing all paint data
 var catalogue;

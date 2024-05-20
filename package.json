@@ -4,7 +4,7 @@
   "description": "Paint usage and cost calculator.",
   "main": "Paint.js",
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/ollieb578/TSIPaint#readme",
   "dependencies": {
-    "core-js": "^3.37.1"
+    "core-js": "^3.37.1",
+    "jest": "^29.7.0"
   },
   "devDependencies": {
     "@types/core-js": "^2.5.8"

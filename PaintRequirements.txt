@@ -37,10 +37,10 @@
 // no of rooms -> no of walls -> wall shape -> wall size -> paint type for usage - DONE
 
 // input, if else, switch case AT LEAST 1 of each - DONE 
-// run AT LEAST 1 unit test - use jest
+// run AT LEAST 1 unit test - use jest - DONE
 
 // keep total for all paint used, and per room - DONE
-// give cost breakdown per room at the end - N/A
+// give cost breakdown per room at the end - N/A - cost breakdown done by paint type
 
 // clone room functionality? - N/A
 
