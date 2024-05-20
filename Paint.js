@@ -24,7 +24,7 @@
 //  - Plan the code more. Draw up what values are required at the start and end, where they're
 //    accessed and how. This would've revealed the OOP thing quickly.
 //  - Understand file formats better/get a sample from somewhere. The JSON thing is embarrasing,
-//    but they've given me hell on a separate project so I format everything like a .csv.
+//    but they've given me hell on a separate project so I formatted everything like a .csv.
 //  - Ask questions about error handling - that input thing feels so weird and wrong. I hate it.
 //    Using a GUI might be the best way to circumvent this, but it's also a lot of effort.
 
@@ -205,7 +205,7 @@ function calculateCost() {
         totalCost += optimizerResult.get("Price");
     }
 
-    console.log("Total cost: £"+totalCost+"\nFull Cost Breakdown:")
+    console.log("\nTotal cost: £"+totalCost+"\nFull Cost Breakdown:")
 
     for (const [key, value] of costMap) {
         console.log("\n "+key+"     Price: £"+value.get("Price"));
@@ -568,7 +568,7 @@ function paintSelect(area) {
 function main() {
     catalogue = readCatalogue();
 
-    console.log("Welcome to TSIPaintCalculator.");
+    console.log("\nWelcome to TSIPaintCalculator.");
     let userChoice = prompt("[V]iew catalogue or [C]alculate paint cost for building? ").toLowerCase();
 
     if (userChoice == "v") {
@@ -596,4 +596,4 @@ function main() {
 }
 
 // 1 line program
-main();
+//main();
